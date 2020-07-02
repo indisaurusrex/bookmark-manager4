@@ -1,5 +1,7 @@
-require "sinatra/base"
-require "./lib/bookmark"
+require 'sinatra/base'
+require './lib/bookmark'
+require './spec/web_helper'
+require 'pg'
 
 class BookmarkManager < Sinatra::Base
   get "/" do
@@ -12,9 +14,9 @@ class BookmarkManager < Sinatra::Base
   end
 
   post "/bookmarks" do
-    url = params['url']
-    connection = PG.connect(dbname: 'bookmark_manager_test')
-    connection.exec("INSERT INTO bookmarks (url) VALUES('#{url}');")
+    $url = params['url']
+    p "The url from params is #{$url}"
+    Bookmark.add
     redirect '/bookmarks'
   end
 
