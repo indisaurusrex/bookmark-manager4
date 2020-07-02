@@ -5,9 +5,8 @@ class Bookmark
     result.map { |bookmark| bookmark['url'] }		    
   end
 
-  def self.add
+  def self.add(url)
     set_environment
-    p "the url in add method is #{$url}"
-    @connection.exec("INSERT INTO bookmarks (url) VALUES('#{$url}');")
+    @connection.exec("INSERT INTO bookmarks (url) VALUES('#{url}');")
   end
 end
